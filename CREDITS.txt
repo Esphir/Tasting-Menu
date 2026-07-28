@@ -1,0 +1,161 @@
+================================================================================
+                                TASTING MENU
+                     CREDITS AND THIRD-PARTY REFERENCES
+================================================================================
+
+  Tasting Menu
+  A third-person action roguelite
+  Jared Fisher, 2026
+
+  BA (Hons) Games Development and Futures
+  Academy of Contemporary Music, Guildford
+  GAM-604
+
+
+--------------------------------------------------------------------------------
+ABOUT THIS DOCUMENT
+--------------------------------------------------------------------------------
+
+This document credits every third-party asset, package and tool used in the
+production of Tasting Menu. It is distributed inside the game build and
+reproduced on the project's public showcase page and repository.
+
+All third-party assets listed here were obtained legitimately through the Unity
+Asset Store and are used in accordance with their licence terms. Every asset is
+redistributed here only as an incorporated part of a compiled game, which is
+what the Standard Unity Asset Store EULA permits.
+
+
+--------------------------------------------------------------------------------
+THIRD-PARTY ASSETS
+--------------------------------------------------------------------------------
+
+HUMAN MELEE ANIMATIONS FREE
+
+  Publisher       Kevin Iglesias
+  Version used    2.0.2
+  Licence         Standard Unity Asset Store EULA
+  Licence type    Extension Asset
+  Source          https://assetstore.unity.com/packages/3d/animations/
+                  human-melee-animations-free-165785
+  Publisher site  https://www.keviniglesias.com
+
+  Used for        All player melee combat animation. Light attack combo, heavy
+                  attack, shield bash and their associated animator states.
+
+  The attack timing system reads these clips' normalized playback time to place
+  hits, so the animations are load-bearing rather than decorative.
+
+
+HUMAN BASIC MOTIONS FREE
+
+  Publisher       Kevin Iglesias
+  Version used    2.4.2
+  Licence         Standard Unity Asset Store EULA
+  Licence type    Extension Asset
+  Source          https://assetstore.unity.com/packages/3d/animations/
+                  human-basic-motions-free-154271
+  Publisher site  https://www.keviniglesias.com
+
+  Used for        Player locomotion animation. Idle, walk, run, sprint, jump and
+                  the dodge roll, driven through the movement animator blend
+                  tree.
+
+
+HUMAN CHARACTER DUMMY
+
+  Publisher       Kevin Iglesias
+  Version used    2.0
+  Licence         Standard Unity Asset Store EULA
+  Licence type    Extension Asset
+  Source          https://assetstore.unity.com/packages/3d/characters/humanoids/
+                  humans/human-character-dummy-178395
+  Publisher site  https://www.keviniglesias.com
+
+  Used for        The player character model. Used as a placeholder pending
+                  bespoke art.
+
+
+SWORD AND SHIELD
+
+  Publisher       Danvil
+  Version used    1.0
+  Licence         Standard Unity Asset Store EULA
+  Licence type    Extension Asset
+  Source          https://assetstore.unity.com/packages/3d/props/weapons/
+                  sword-and-shield-358880
+
+  Used for        The player's weapon and shield models.
+
+  The Unity Asset Store listing for this package carries a "Created with AI"
+  disclosure from its publisher, indicating that generative tools were used in
+  its production. It is noted here for transparency.
+
+
+--------------------------------------------------------------------------------
+ENGINE AND PACKAGES
+--------------------------------------------------------------------------------
+
+All of the following are produced by Unity Technologies and used under the Unity
+terms of service applicable to the editor and its packages.
+
+  Unity Engine 6                Runtime and editor
+  Universal Render Pipeline     Rendering
+  Input System                  All input handling, device detection and
+                                runtime rebinding
+  Cinemachine                   Third-person follow camera
+  ProBuilder                    Level geometry blockout and room prefabs
+  AI Navigation                 Navigation surfaces
+  Timeline                      Sequencing
+  Visual Scripting              Included package, present in the project
+  uGUI                          User interface framework
+
+  Unity terms of service        https://unity.com/legal/terms-of-service
+
+
+--------------------------------------------------------------------------------
+EVERYTHING ELSE
+--------------------------------------------------------------------------------
+
+Design, programming, level design, systems architecture, user interface, and all
+remaining art and configuration by JARED FISHER.
+
+This includes the full runtime codebase: the combat framework, the procedural
+level generation system, enemy and boss AI, the run and progression systems, the
+tutorial, the minimap, and all editor tooling.
+
+
+--------------------------------------------------------------------------------
+LICENCE SUMMARY
+--------------------------------------------------------------------------------
+
+Every third-party asset in this project is covered by the Standard Unity Asset
+Store EULA, available in full at:
+
+  https://unity.com/legal/as-terms
+
+Under that licence these assets are supplied as Extension Assets, licensed to a
+single individual for use in an unlimited number of projects. They may be
+distributed as an incorporated component of an interactive product, which is
+what this build is.
+
+The assets themselves are NOT redistributable in their original form. Anyone
+wishing to use them in their own project must obtain them from the Unity Asset
+Store directly, using the links above.
+
+The original code and content authored by Jared Fisher is covered separately by
+the licence file accompanying the project repository.
+
+
+--------------------------------------------------------------------------------
+CONTACT
+--------------------------------------------------------------------------------
+
+  Jared Fisher
+  itch.io    https://fisherinteractive.itch.io
+
+
+Last updated July 2026. If any attribution here is incomplete or incorrect,
+please get in touch and it will be corrected.
+
+================================================================================

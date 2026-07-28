@@ -7,39 +7,70 @@ namespace Signal.UI
 {
     public sealed class CreditsUI : MonoBehaviour
     {
+        // An entry is a credit line plus an optional dimmer line saying what it was used for.
+        private readonly struct Entry
+        {
+            public readonly string Line;
+            public readonly string Detail;
+            public Entry(string line, string detail = null) { Line = line; Detail = detail; }
+            public static implicit operator Entry(string line) => new Entry(line);
+        }
+
         private readonly struct Section
         {
             public readonly string Heading;
-            public readonly string[] Items;
-            public Section(string heading, params string[] items) { Heading = heading; Items = items; }
+            public readonly Entry[] Items;
+            public Section(string heading, params Entry[] items) { Heading = heading; Items = items; }
         }
 
         private static readonly Section[] Sections =
         {
-            new Section("Art & Animation",
-                "Kevin Iglesias — Human Melee Animations 2.0 (FREE)",
-                "Kevin Iglesias — Human Character Dummy",
-                "Danvil — Kit01: Sword and Shield"),
+            new Section("Third-Party Assets",
+                new Entry("Kevin Iglesias — Human Melee Animations Free 2.0.2",
+                          "Light attack combo, heavy attack and shield bash"),
+                new Entry("Kevin Iglesias — Human Basic Motions Free 2.4.2",
+                          "Idle, walk, run, sprint, jump and the dodge roll"),
+                new Entry("Kevin Iglesias — Human Character Dummy 2.0",
+                          "Player character model, placeholder pending bespoke art"),
+                new Entry("Danvil — Sword and Shield 1.0",
+                          "Player weapon and shield models. Publisher discloses AI-assisted creation.")),
 
             new Section("Engine & Packages — Unity Technologies",
-                "Unity Engine",
+                "Unity Engine 6",
                 "Universal Render Pipeline",
-                "Cinemachine",
                 "Input System",
+                "Cinemachine",
                 "ProBuilder",
                 "AI Navigation",
                 "Timeline",
                 "Visual Scripting",
                 "uGUI"),
 
-            new Section("Everything Else",
-                "Design, code, levels and remaining art by Jared Fisher"),
+            new Section("Everything Else — Jared Fisher",
+                "Design, programming, level design, systems architecture and UI",
+                "Combat framework, procedural level generation, enemy and boss AI",
+                "Run and progression systems, tutorial, minimap, all editor tooling",
+                "All remaining art and configuration"),
+
+            new Section("Licences",
+                "Third-party assets are used under the Standard Unity Asset Store EULA",
+                "as Extension Assets — unity.com/legal/as-terms",
+                "They are not redistributable in their original form; obtain them from",
+                "the Unity Asset Store directly.",
+                "Full attributions ship with the game in StreamingAssets/CREDITS.txt"),
+
+            new Section("Tasting Menu",
+                "A third-person action roguelite by Jared Fisher, 2026",
+                "BA (Hons) Games Development and Futures, GAM-604",
+                "Academy of Contemporary Music, Guildford",
+                "fisherinteractive.itch.io"),
         };
 
         private static readonly Color DimColor = new Color(0.05f, 0.05f, 0.08f, 0.97f);
         private static readonly Color ButtonColor = new Color(0.16f, 0.16f, 0.22f);
         private static readonly Color HeadingColor = new Color(0.55f, 0.8f, 1f);
         private static readonly Color ItemColor = new Color(0.85f, 0.85f, 0.9f);
+        private static readonly Color DetailColor = new Color(0.58f, 0.58f, 0.66f);
 
         private static CreditsUI _open;
 
@@ -105,12 +136,19 @@ namespace Signal.UI
             heading.color = HeadingColor;
             heading.gameObject.AddComponent<LayoutElement>().preferredHeight = 52f;
 
-            foreach (string item in section.Items)
+            foreach (Entry item in section.Items)
             {
-                Text line = UiBuilder.CreateText(content, "Item", item, 21, FontStyle.Normal, TextAnchor.MiddleLeft);
+                Text line = UiBuilder.CreateText(content, "Item", item.Line, 21, FontStyle.Normal, TextAnchor.MiddleLeft);
                 line.color = ItemColor;
                 line.horizontalOverflow = HorizontalWrapMode.Wrap;
                 line.gameObject.AddComponent<LayoutElement>().preferredHeight = 30f;
+
+                if (string.IsNullOrEmpty(item.Detail)) continue;
+
+                Text detail = UiBuilder.CreateText(content, "Detail", "    " + item.Detail, 17, FontStyle.Italic, TextAnchor.MiddleLeft);
+                detail.color = DetailColor;
+                detail.horizontalOverflow = HorizontalWrapMode.Wrap;
+                detail.gameObject.AddComponent<LayoutElement>().preferredHeight = 24f;
             }
 
             UiBuilder.NewRect(content, "Spacer").gameObject.AddComponent<LayoutElement>().preferredHeight = 22f;

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Signal.Minimap
 {
-    [CreateAssetMenu(menuName = "Signal Lost/Minimap/Minimap Database", fileName = "MinimapDatabase")]
+    [CreateAssetMenu(menuName = "Tasting Menu/Minimap/Minimap Database", fileName = "MinimapDatabase")]
     public class MinimapDatabase : ScriptableObject
     {
         [Header("Tile Background (by fog state)")]

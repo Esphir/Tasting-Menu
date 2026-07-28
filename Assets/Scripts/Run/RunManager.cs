@@ -76,6 +76,7 @@ namespace Signal.Run
 
         private RunStats _stats;
         private float _runStartTime;
+        private string _sandboxScene;
 
         private void Awake()
         {
@@ -105,6 +106,15 @@ namespace Signal.Run
             RunActive = true;
             Debug.Log("[Run] Run started.");
             StatsChanged?.Invoke();
+        }
+
+        // Flags the active scene as a sandbox. The tutorial hands out a real upgrade so its loot beat
+        // can be practised for real, but that progress belongs to the tutorial — leaving the scene
+        // wipes the run so none of it follows the player into their first real run.
+        public void MarkSandbox()
+        {
+            _sandboxScene = SceneManager.GetActiveScene().name;
+            Debug.Log($"[Run] '{_sandboxScene}' marked as a sandbox — its progress is discarded on exit.");
         }
 
         public void AdvanceRun()
@@ -180,13 +190,16 @@ namespace Signal.Run
         {
             Time.timeScale = 1f;
 
+            bool leftSandbox = _sandboxScene != null && scene.name != _sandboxScene;
+            if (leftSandbox) _sandboxScene = null;
+
             if (scene.name == MainMenuSceneName)
             {
                 EndRun(RunEndReason.ReturnedToMenu);
                 return;
             }
 
-            if (!RunActive) StartRun();
+            if (!RunActive || leftSandbox) StartRun();
 
             if (RunSaveSystem.PendingResume != null)
             {

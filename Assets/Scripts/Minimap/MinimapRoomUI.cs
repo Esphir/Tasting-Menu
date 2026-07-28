@@ -19,6 +19,12 @@ namespace Signal.Minimap
         private float _opacity = 1f;
         private float _brightness = 1f;
         private bool _pulse;
+        private bool _settled;
+        private float _appliedReveal = float.NaN;
+
+        // Below this the easing is visually done; without a cutoff Mathf.Lerp only ever approaches
+        // its goal, so the tile would repaint forever and never reach the settled state.
+        private const float ScaleEpsilon = 0.0005f;
 
         public void Build(MinimapDatabase db, float tileSize, float iconSize)
         {
@@ -52,6 +58,10 @@ namespace Signal.Minimap
         {
             _opacity = opacity;
             _pulse = pulse && room.IsCurrentRoom;
+            _settled = false;
+            // Invalidate the repaint cache: opacity, brightness and the icon can all have changed
+            // here, and the hidden early-return below leaves without repainting at all.
+            _appliedReveal = float.NaN;
 
             if (!room.IsVisible && !revealAll)
             {
@@ -79,6 +89,7 @@ namespace Signal.Minimap
             if (!animate) { _reveal = 1f; _scale = _targetScale; }
             ApplyColours();
             ApplyTransform();
+            _appliedReveal = _reveal;
         }
 
         private void Update()
@@ -98,7 +109,33 @@ namespace Signal.Minimap
                 return;
             }
 
-            ApplyColours();
+            // Once the reveal and scale have finished animating and this isn't the pulsing current
+            // room, the tile is a static image. Writing Image.color calls SetVerticesDirty, so
+            // repainting all four graphics every frame — across every room on the map — forced the
+            // minimap canvas to rebuild every frame for no visible change. Repaint the last frame,
+            // then stop until SetState says something actually changed.
+            if (!_pulse
+                && Mathf.Approximately(_reveal, _targetReveal)
+                && Mathf.Abs(_scale - _targetScale) < ScaleEpsilon)
+            {
+                if (_settled) return;
+                _settled = true;
+                _scale = _targetScale;
+            }
+            else
+            {
+                _settled = false;
+            }
+
+            // Within Update the colours depend only on the reveal fade — opacity, brightness and the
+            // icon only ever change via SetState, which repaints directly. So the pulsing current
+            // room rewrites just its scale each frame instead of dirtying four Images' geometry.
+            if (!Mathf.Approximately(_reveal, _appliedReveal))
+            {
+                _appliedReveal = _reveal;
+                ApplyColours();
+            }
+
             ApplyTransform();
         }
 

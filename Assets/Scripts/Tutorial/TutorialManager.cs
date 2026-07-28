@@ -1,4 +1,5 @@
 // Drives the tutorial as an ordered list of TutorialSteps.
+using Signal.Run;
 using Signal.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -34,6 +35,9 @@ namespace Signal.Tutorial
 
         private void Start()
         {
+            // Anything earned in here — the loot step's upgrade, kills, pickups — is practice, not progress.
+            RunManager.Instance.MarkSandbox();
+
             if (TutorialState.Completed && !replayIfCompleted)
             {
                 promptUI?.Hide();

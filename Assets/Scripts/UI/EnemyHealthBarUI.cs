@@ -49,6 +49,12 @@ namespace Signal.UI
                 return;
             }
 
+            // Most enemies sit at full health with the bar hidden for most of a run. Moving and
+            // re-orienting an invisible world-space canvas costs the same as a visible one. Nothing
+            // is deferred by skipping it: damage enables the canvas during Update, and this
+            // LateUpdate runs later in that same frame, so the bar is placed before it can be seen.
+            if (!_canvas.enabled) return;
+
             transform.position = _followTarget.position + Vector3.up * _heightOffset;
 
             if (billboardCamera == null) billboardCamera = Camera.main;

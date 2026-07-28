@@ -14,7 +14,11 @@ namespace Signal.UI
 
         private const float RowHeight = 64f;
         private const float RowSpacing = 6f;
-        private const float GeneralHeight = RowHeight * 2f + RowSpacing;
+        private const int GeneralRowCount = 3;
+        private const float GeneralHeight = RowHeight * GeneralRowCount + RowSpacing * (GeneralRowCount - 1);
+
+        // Cycled by the Frame Rate Cap button; 0 is unlimited.
+        private static readonly int[] FrameRateCaps = { 0, 30, 60, 90, 120, 144, 165, 240 };
 
         private static readonly Color WindowColor = new Color(0.11f, 0.11f, 0.15f, 0.98f);
         private static readonly Color ButtonColor = new Color(0.16f, 0.16f, 0.22f);
@@ -73,6 +77,7 @@ namespace Signal.UI
             general.anchoredPosition = Vector2.zero;
             BuildMouseSensitivity(NewGeneralRow(general, "MouseSensitivityRow", 0));
             BuildCameraSide(NewGeneralRow(general, "CameraSideRow", 1));
+            BuildFrameRateCap(NewGeneralRow(general, "FrameRateCapRow", 2));
 
             RectTransform controls = UiBuilder.NewRect(content, "Controls");
             controls.anchorMin = new Vector2(0f, 0f);
@@ -141,6 +146,36 @@ namespace Signal.UI
                 toggleText.text = FormatCameraSide(SettingsStore.CameraSide);
             });
         }
+
+        private static void BuildFrameRateCap(Image row)
+        {
+            Text label = UiBuilder.CreateText(row.transform, "Label", "Frame Rate Cap", 22, FontStyle.Normal, TextAnchor.MiddleLeft);
+            label.rectTransform.anchorMin = new Vector2(0f, 0f);
+            label.rectTransform.anchorMax = new Vector2(0.4f, 1f);
+            label.rectTransform.offsetMin = new Vector2(14f, 0f);
+            label.rectTransform.offsetMax = Vector2.zero;
+
+            Button toggle = UiBuilder.CreateButton(row.transform, "Toggle", FormatFrameRateCap(SettingsStore.FrameRateCap), ButtonColor, 22, out Text toggleText);
+            var toggleRect = (RectTransform)toggle.transform;
+            toggleRect.anchorMin = new Vector2(0.42f, 0.18f);
+            toggleRect.anchorMax = new Vector2(0.84f, 0.82f);
+            toggleRect.offsetMin = Vector2.zero;
+            toggleRect.offsetMax = Vector2.zero;
+            toggle.onClick.AddListener(() =>
+            {
+                SettingsStore.FrameRateCap = NextFrameRateCap(SettingsStore.FrameRateCap);
+                toggleText.text = FormatFrameRateCap(SettingsStore.FrameRateCap);
+            });
+        }
+
+        private static int NextFrameRateCap(int current)
+        {
+            for (int i = 0; i < FrameRateCaps.Length; i++)
+                if (FrameRateCaps[i] == current) return FrameRateCaps[(i + 1) % FrameRateCaps.Length];
+            return FrameRateCaps[0];
+        }
+
+        private static string FormatFrameRateCap(int cap) => cap <= 0 ? "Unlimited" : $"{cap} FPS";
 
         private static string FormatCameraSide(int side) => side < 0 ? "Left" : "Right";
 

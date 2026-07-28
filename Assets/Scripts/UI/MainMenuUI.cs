@@ -11,7 +11,7 @@ namespace Signal.UI
 {
     public class MainMenuUI : MonoBehaviour
     {
-        [SerializeField] private string gameTitle = "SIGNAL LOST";
+        [SerializeField] private string gameTitle = "TASTING MENU";
         [SerializeField]
         [Tooltip("First-time-play scene (the tutorial). Must be in Build Settings.")]
         private string gameplaySceneName = "Tutorial";

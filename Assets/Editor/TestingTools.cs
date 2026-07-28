@@ -11,7 +11,7 @@ namespace Signal.DevEditor
     {
         private const int BossRun = 5;
 
-        [MenuItem("Tools/Signal Lost/Testing/Reset Tutorial & Run Save")]
+        [MenuItem("Tools/Tasting Menu/Testing/Reset Tutorial & Run Save")]
         public static void ResetTutorialAndRun()
         {
             TutorialState.Reset();
@@ -20,7 +20,7 @@ namespace Signal.DevEditor
             Debug.Log("[Testing] Tutorial-completed flag cleared and run save deleted — the next Play shows the tutorial and starts a fresh run.");
         }
 
-        [MenuItem("Tools/Signal Lost/Testing/Jump To Boss Run")]
+        [MenuItem("Tools/Tasting Menu/Testing/Jump To Boss Run")]
         public static void JumpToBossRun()
         {
             if (Application.isPlaying && RunManager.HasInstance)

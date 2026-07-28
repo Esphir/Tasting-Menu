@@ -8,7 +8,7 @@ namespace Signal.GenerationEditor
     [CustomEditor(typeof(LevelGenerator))]
     public class LevelGeneratorEditor : Editor
     {
-        private const string SeedPrefKey = "SignalLost.LevelGenerator.ReproSeed";
+        private const string SeedPrefKey = "TastingMenu.LevelGenerator.ReproSeed";
 
         public override void OnInspectorGUI()
         {

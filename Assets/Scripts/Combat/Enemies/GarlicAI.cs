@@ -35,12 +35,24 @@ namespace Signal.Combat.Enemies
         private Collider[] _allyBuffer;
         private int _allyCount;
         private float _nextThreatSearch;
+        private Transform _cover;
+        private float _nextAllyScan;
+
+        // The ally scan is a physics overlap plus a GetComponentInChildren for every neighbour it
+        // finds — far too heavy to repeat every frame on every Garlic, and it scales with the square
+        // of how many are grouped up. Which enemies are nearby changes on the order of seconds, so
+        // refreshing a few times a second is indistinguishable in play. Everything positional
+        // (separation, crowding, path-stepping) still reads live transforms every frame.
+        private const float AllyScanInterval = 0.15f;
 
         private void Awake()
         {
             _motor = GetComponent<EnemyMotor>();
             _stunnable = GetComponent<IStunnable>();
             _allyBuffer = new Collider[16];
+            // Spread the first scan out, so a group spawned on the same frame doesn't line up and
+            // turn a per-frame cost into a synchronised spike every interval instead.
+            _nextAllyScan = Time.time + Random.Range(0f, AllyScanInterval);
         }
 
         private void Update()
@@ -48,9 +60,14 @@ namespace Signal.Combat.Enemies
             if (_stunnable != null && _stunnable.IsStunned) { _motor.Stop(); return; }
             if (!TryAcquireThreat()) { _motor.Stop(); return; }
 
-            Transform cover = FindBestCoverAlly();
-            Vector3 desired = cover != null
-                ? CoverPositionBehind(cover)
+            if (Time.time >= _nextAllyScan)
+            {
+                _nextAllyScan = Time.time + AllyScanInterval;
+                _cover = FindBestCoverAlly();
+            }
+
+            Vector3 desired = _cover != null
+                ? CoverPositionBehind(_cover)
                 : RetreatPosition();
             desired = ApplySeparation(desired);
 

@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: GAM - 604 Signal Lost
+  productName: Tasting Menu
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -844,14 +844,14 @@ PlayerSettings:
   editorAssembliesCompatibilityLevel: 1
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: GAM - 604 Signal Lost
+  metroPackageName: Tasting Menu
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: GAM - 604 Signal Lost
+  metroApplicationDescription: Tasting Menu
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -925,7 +925,7 @@ PlayerSettings:
   cloudProjectId: 5ec9bfd8-69c5-460d-a6d8-b7491376039d
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: GAM - 604 Signal Lost
+  projectName: Tasting Menu
   organizationId: jf4689
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0

@@ -56,6 +56,10 @@ namespace Signal.Minimap
         private Transform _player;
         private bool _lastReveal;
         private RectTransform _arrow;
+        private Camera _view;
+        private float _appliedArrowSize = float.NaN;
+        private float _appliedArrowYaw = float.NaN;
+        private Vector2Int? _appliedArrowCell;
         private static Sprite _arrowSprite;
 
         private struct Connection { public Image Image; public MinimapRoom A, B; }
@@ -432,20 +436,44 @@ namespace Signal.Minimap
                 image.raycastTarget = false;
                 _arrow = image.rectTransform;
                 _arrow.anchorMin = _arrow.anchorMax = _arrow.pivot = new Vector2(0.5f, 0.5f);
+                // Ordering only needs doing once: the arrow is created after the tiles and
+                // connections, and the only thing that adds to `content` afterwards is Rebuild,
+                // which clears the arrow along with everything else. Re-running SetAsLastSibling
+                // every frame reordered the hierarchy and forced a full canvas rebuild each time.
+                _arrow.SetAsLastSibling();
+                _appliedArrowSize = float.NaN;
+                _appliedArrowCell = null;
             }
 
-            _arrow.SetAsLastSibling();
-            _arrow.sizeDelta = Vector2.one * arrowSize;
-            _arrow.anchoredPosition = (Vector2)_current.GridPosition * roomSpacing;
+            // Kept assignable so the inspector sliders still work during play, but only written when
+            // the value actually changes — a redundant sizeDelta write dirties the canvas layout.
+            if (!Mathf.Approximately(_appliedArrowSize, arrowSize))
+            {
+                _appliedArrowSize = arrowSize;
+                _arrow.sizeDelta = Vector2.one * arrowSize;
+            }
+
+            Vector2Int cell = _current.GridPosition;
+            if (_appliedArrowCell != cell)
+            {
+                _appliedArrowCell = cell;
+                _arrow.anchoredPosition = (Vector2)cell * roomSpacing;
+            }
+
             // The sprite is authored pointing up = north. World yaw runs clockwise seen from above,
             // but UI Z-rotation runs counter-clockwise, so negate it to make the two agree.
-            _arrow.localRotation = Quaternion.Euler(0f, 0f, -LookYaw());
+            float yaw = LookYaw();
+            if (!Mathf.Approximately(_appliedArrowYaw, yaw))
+            {
+                _appliedArrowYaw = yaw;
+                _arrow.localRotation = Quaternion.Euler(0f, 0f, -yaw);
+            }
         }
 
         private float LookYaw()
         {
-            Camera view = Camera.main;
-            if (view != null) return view.transform.eulerAngles.y;
+            if (_view == null) _view = Camera.main;
+            if (_view != null) return _view.transform.eulerAngles.y;
             return _player != null ? _player.eulerAngles.y : 0f;
         }
 

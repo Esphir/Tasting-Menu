@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Signal.Spawning
 {
-    [CreateAssetMenu(fileName = "EnemySpawnProfile", menuName = "Signal Lost/Enemy Spawn Profile")]
+    [CreateAssetMenu(fileName = "EnemySpawnProfile", menuName = "Tasting Menu/Enemy Spawn Profile")]
     public class EnemySpawnProfile : ScriptableObject
     {
         [SerializeField]

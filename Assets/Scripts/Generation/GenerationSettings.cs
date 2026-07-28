@@ -15,7 +15,7 @@ namespace Signal.Generation
         public GameObject prefab;
     }
 
-    [CreateAssetMenu(menuName = "Signal Lost/Generation/Generation Settings", fileName = "GenerationSettings")]
+    [CreateAssetMenu(menuName = "Tasting Menu/Generation/Generation Settings", fileName = "GenerationSettings")]
     public class GenerationSettings : ScriptableObject
     {
         [Header("Length")]

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Signal.Generation
 {
-    [CreateAssetMenu(menuName = "Signal Lost/Generation/Room Database", fileName = "RoomDatabase")]
+    [CreateAssetMenu(menuName = "Tasting Menu/Generation/Room Database", fileName = "RoomDatabase")]
     public class RoomDatabase : ScriptableObject
     {
         [Serializable]

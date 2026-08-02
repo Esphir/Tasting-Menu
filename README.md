@@ -10,7 +10,7 @@ Every run assembles its floors differently. You fight through food-themed enemie
 
 This is my final year project for GAM-604, BA (Hons) Games Development and Futures at ACM Guildford.
 
-The game exists to answer one question: how can a real-time level generator guarantee that a floor is playable without narrowing what it's able to produce? The usual trade is that a tightly constrained generator always makes completable levels that all feel the same, and a loose one makes varied levels that sometimes can't be finished. My generator builds a complete candidate floor, audits it against four structural guarantees, and bins it and reseeds if it fails, rather than restricting what it's allowed to build in the first place. Nothing in the room pool is ever excluded — only unplayable results get thrown away.
+The game exists to answer one question: how can a real-time level generator guarantee that a floor is playable without narrowing what it's able to produce? The usual trade is that a tightly constrained generator always makes completable levels that all feel the same, and a loose one makes varied levels that sometimes can't be finished. My generator builds a complete candidate floor, audits it against four structural guarantees, and bins it and reseeds if it fails, rather than restricting what it's allowed to build in the first place. Nothing in the room pool is ever excluded; only unplayable results get thrown away.
 
 The concept came from a gap I kept noticing. Food games are a big category, and almost all of them are cooking games: prepare, serve, manage. Nobody was making the obvious other version, where you fight it.
 

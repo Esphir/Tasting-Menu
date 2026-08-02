@@ -12,7 +12,7 @@ This is my final year project for GAM-604, BA (Hons) Games Development and Futur
 
 The game exists to answer one question: how can a real-time level generator guarantee that a floor is playable without narrowing what it's able to produce? The usual trade is that a tightly constrained generator always makes completable levels that all feel the same, and a loose one makes varied levels that sometimes can't be finished. My generator builds a complete candidate floor, audits it against four structural guarantees, and bins it and reseeds if it fails, rather than restricting what it's allowed to build in the first place. Nothing in the room pool is ever excluded — only unplayable results get thrown away.
 
-The concept came from a gap I kept noticing. Food games are a big category and almost all of them are cooking games: prepare, serve, manage. Nobody was making the obvious other version, where you fight it.
+The concept came from a gap I kept noticing. Food games are a big category, and almost all of them are cooking games: prepare, serve, manage. Nobody was making the obvious other version, where you fight it.
 
 The full architecture write-up is in the Technical Design Document, and the design and market reasoning is in the Concept Design Document.
 
@@ -43,7 +43,7 @@ The dodge has invincibility frames through the middle of the roll but not at the
 
 ## Running it
 
-Download the build from the releases page or from itch.io, extract the whole zip, and run the executable. The `_Data` folder next to it has to stay there — extracting just the .exe won't work.
+Download the build from the releases page or from itch.io, extract the whole zip, and run the executable. The `_Data` folder next to it has to stay there; extracting just the .exe won't work.
 
 To open the project, clone it and open the folder in Unity 6. Everything it needs is committed, so there's nothing to fetch from the Asset Store.
 
@@ -53,4 +53,4 @@ Unity 6, Universal Render Pipeline, C#, the Unity Input System, Cinemachine, Pro
 
 ## Credits
 
-Player combat animations and character dummy by [Kevin Iglesias](https://assetstore.unity.com/publishers/17148). Sword and shield models from Danvil's Kit01. Everything else — code, design, level authoring, remaining art — by me.
+Player combat animations and character dummy by [Kevin Iglesias](https://assetstore.unity.com/publishers/17148). Sword and shield models from Danvil's Kit01. Everything else — code, design, level authoring, remaining art, by me.

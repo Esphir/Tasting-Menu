@@ -34,13 +34,6 @@ Fully rebindable at runtime from the settings menu, for both keyboard and contro
 
 The dodge has invincibility frames through the middle of the roll but not at the start or the end, so it's a commitment rather than a panic button. Dodge just before an attack lands and you get a brief slow-motion window as a reward.
 
-## Enemies
-
-**Panquake** — leaps, hangs at the top of the arc, slams down with a shockwave.
-**Garlic** — never attacks you. Hides behind its allies and shields them. Kill it first.
-**Kernel Cannon** — static artillery, lobs shots on a visible arc. Watch where the shadow lands.
-**Hot Sauce** — the boss. Four attacks picked by distance, a flamethrower, a full-rotation spin, and kamikaze ghost peppers. Phase two at half health.
-
 ## Running it
 
 Download the build from the releases page or from itch.io, extract the whole zip, and run the executable. The `_Data` folder next to it has to stay there; extracting just the .exe won't work.

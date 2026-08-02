@@ -4,7 +4,7 @@ A third-person action roguelite where the food fights back. Built solo in Unity 
 
 You went down to the walk-in for more stock and didn't come back up. Below the restaurant is a kitchen that doesn't end, divided into stations that have been left running long enough that the food has taken over. You've got a knife and a pan lid. Go down.
 
-Every run assembles its floors differently. You fight through food-themed enemies with a sword and shield, pick up loot, choose a stat upgrade between rooms, and hit a boss every fifth floor. Die and you start over on a layout you haven't seen — what you keep is knowledge of the systems, not the map.
+Every run assembles its floors differently. You fight through food-themed enemies with a sword and shield, pick up loot, choose a stat upgrade between rooms, and hit a boss every fifth floor. Die, and you start over on a layout you haven't seen; what you keep is knowledge of the systems, not the map.
 
 ## Why I made it
 
